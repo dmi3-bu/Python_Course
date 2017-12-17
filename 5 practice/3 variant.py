@@ -9,15 +9,17 @@
 class Polynomial():
     """Класс многочленов по одной неизвестной
     """
-    def __init__(self, power: int, coefficients: "list of ints"):
+    def __init__(self, power: int, coefficients: list):
         try:
-            assert(power >= 0)
-        except AssertionError:
+            if power <= 0:
+                raise AttributeError
+        except AttributeError:
             print("Ошибка: степень многочлена не может быть меньше нуля")
             quit()
         try:
-            assert(power == len(coefficients)-1)
-        except AssertionError:
+            if power != len(coefficients)-1:
+                raise ValueError
+        except ValueError:
             print("Ошибка: степень многочлена не совпадает с количеством "
                   "коэффициентов")
             quit()
@@ -32,7 +34,8 @@ class Polynomial():
             if coeff != 0:
                 if coeff > 0:
                     sign = " + "
-                else: sign = " - "
+                else:
+                    sign = " - "
                 if power != 0 and (coeff == 1 or coeff == -1):
                     coeff = ""
                 coeff = str(coeff).strip('-')
@@ -50,19 +53,19 @@ class Polynomial():
         return view
 
     def __add__(self, polynom_2):
-        coeffs_1 = self.coefficients.copy()
-        coeffs_2 = polynom_2.coefficients.copy()
+        coeffs_1 = self.coefficients[:]
+        coeffs_2 = polynom_2.coefficients[:]
         while len(coeffs_1) != len(coeffs_2):
-            min(coeffs_1, coeffs_2, key = len).insert(0, 0)
+            min(coeffs_1, coeffs_2, key=len).insert(0, 0)
         sum_coeffs = list(map(lambda coeff_1, coeff_2: coeff_1 + coeff_2,
                               coeffs_1, coeffs_2))
-        sum_power = max(self.power,polynom_2.power)
+        sum_power = max(self.power, polynom_2.power)
         summ = Polynomial(sum_power, sum_coeffs)
         return summ
 
     def __sub__(self, polynom_2):
-        coeffs_1 = self.coefficients.copy()
-        coeffs_2 = polynom_2.coefficients.copy()
+        coeffs_1 = self.coefficients[:]
+        coeffs_2 = polynom_2.coefficients[:]
         while len(coeffs_1) != len(coeffs_2):
             min(coeffs_1, coeffs_2, key = len).insert(0, 0)
         diff_coeffs = list(map(lambda coeff_1, coeff_2: coeff_1 - coeff_2,
@@ -75,8 +78,8 @@ class Polynomial():
         """Реализация алгоритма: 
         http://www.nado5.ru/e-book/umnozhenie-mnogochlena-na-mnogochlen
         """
-        coeffs_1 = self.coefficients.copy()
-        coeffs_2 = polynom_2.coefficients.copy()
+        coeffs_1 = self.coefficients[:]
+        coeffs_2 = polynom_2.coefficients[:]
         while len(coeffs_1) != len(coeffs_2):
             min(coeffs_1,coeffs_2, key = len).insert(0, 0)
         prod_power = (len(coeffs_1)-1)*2
@@ -127,7 +130,7 @@ second_poly = Polynomial(power_2,coefficients_2)
 print(second_poly)
 
 summ = first_poly + second_poly
-print('Сумма многочленов равна: {}'.format(sum))
+print('Сумма многочленов равна: {}'.format(summ))
 difference = first_poly - second_poly
 print('Разность многочленов равна: {}'.format(difference))
 product = first_poly * second_poly
