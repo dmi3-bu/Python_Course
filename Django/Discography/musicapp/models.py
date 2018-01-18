@@ -7,7 +7,7 @@ class Artist(models.Model):
     """
     artist_name = models.CharField('Исполнитель', max_length=30)
     description = models.TextField('Описание', blank=True, null=True)
-    albums = models.ManyToManyField('Album',verbose_name = 'Альбомы', related_name='Artist',
+    albums = models.ManyToManyField('Album',verbose_name = 'Альбомы', related_name='artists',
                                     blank=True)
 
     class Meta:
@@ -25,7 +25,7 @@ class Album(models.Model):
     """
     album_name = models.CharField('Название', max_length=30)
     release_date = models.DateField('Выпущен')
-    genres = models.ManyToManyField('Genre', verbose_name = 'Жанры',  related_name='Album')
+    genres = models.ManyToManyField('Genre', verbose_name = 'Жанры',  related_name='albums')
     
     class Meta:
         ordering = ('album_name',)
@@ -43,7 +43,7 @@ class Track(models.Model):
     track_name = models.CharField('Трек', max_length=40)
     length = models.DurationField('Длительность')
     order_no = models.IntegerField('Номер в альбоме')
-    album = models.ForeignKey('Album',verbose_name = 'Альбом', related_name='Track',
+    album = models.ForeignKey('Album',verbose_name = 'Альбом', related_name='track',
                               on_delete='SET_NULL')
 
     class Meta:
