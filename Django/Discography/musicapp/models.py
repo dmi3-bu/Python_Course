@@ -2,9 +2,12 @@
 
 
 class Artist(models.Model):
+    """
+    Модель исполнителя
+    """
     artist_name = models.CharField('Исполнитель', max_length=30)
     description = models.TextField('Описание', blank=True, null=True)
-    albums = models.ManyToManyField('Album', related_name='Artist',
+    albums = models.ManyToManyField('Album',verbose_name = 'Альбомы', related_name='Artist',
                                     blank=True)
 
     class Meta:
@@ -17,9 +20,12 @@ class Artist(models.Model):
 
 
 class Album(models.Model):
+    """
+    Модель альбома
+    """
     album_name = models.CharField('Название', max_length=30)
     release_date = models.DateField('Выпущен')
-    genres = models.ManyToManyField('Genre',  related_name='Album')
+    genres = models.ManyToManyField('Genre', verbose_name = 'Жанры',  related_name='Album')
     
     class Meta:
         ordering = ('album_name',)
@@ -31,10 +37,13 @@ class Album(models.Model):
 
 
 class Track(models.Model):
+    """
+    Модель трека
+    """
     track_name = models.CharField('Трек', max_length=40)
     length = models.DurationField('Длительность')
     order_no = models.IntegerField('Номер в альбоме')
-    album = models.ForeignKey('Album', related_name='Track',
+    album = models.ForeignKey('Album',verbose_name = 'Альбом', related_name='Track',
                               on_delete='SET_NULL')
 
     class Meta:
@@ -47,6 +56,9 @@ class Track(models.Model):
 
 
 class Genre(models.Model):
+    """
+    Модель жанра
+    """
     name = models.CharField('Жанр', max_length=15)
 
     class Meta:

@@ -1,3 +1,21 @@
 from django.shortcuts import render
+from django.http import Http404
 
-# Create your views here.
+from .models import Artist
+
+
+def artists_list(request):
+    artists = Artist.objects.all()
+    return render(request, 'musicapp/index.html', {'artists': artists})
+
+
+def albums_by_artist(request, art_name):
+    try:
+        artist = Artist.objects.get(artist_name=art_name)
+    except Artist.DoesNotExist:
+        raise Http404
+
+    return render(request, 'musicapp/albums_artist.html', {
+                'albums': artist.albums.all(),
+                'artist': artist,
+})
