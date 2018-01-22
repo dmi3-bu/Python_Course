@@ -43,7 +43,7 @@ class Track(models.Model):
     track_name = models.CharField('Трек', max_length=40)
     length = models.DurationField('Длительность')
     order_no = models.IntegerField('Номер в альбоме')
-    album = models.ForeignKey('Album',verbose_name = 'Альбом', related_name='track',
+    album = models.ForeignKey('Album',verbose_name = 'Альбом', related_name='tracks',
                               on_delete='SET_NULL')
 
     class Meta:

@@ -5,6 +5,8 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.artists_list),
-    path('<str:art_name>/', views.albums_by_artist, name='artist'),
+    path('', views.index, name='index'),
+    path('genre/<str:genre_input>/', views.genre_info, name='genre'),
+    path('artist/<str:artist_input>/', views.artist_info, name='artist'),
+    path('album/<int:album_id>/<str:album_input>/', views.album_info, name='album'),
 ]

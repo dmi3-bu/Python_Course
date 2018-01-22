@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Дискография</title>
+    <title>{% block title %}{% endblock %}</title>
     <style>
+        body{
+             background-color: #F7F2E0; /* Цвет фона веб-страницы */
+        }
         h1 {
-            color: red;
+            color: #4da89d;
         }
 
         li {
-            font-size: 32px;
+            font-size: 28px;
         }
     </style>
 </head>
 <body>
+    <img align="right" src="/static/musicapp/site_logo.png"><br>
     {% now 'd/m/y h:m:s' %}
-    {% block content %}{% endblock %}
     {% block content1 %}{% endblock %}
+    <a href='{% url "index" %}'>На главную страницу</a>
 </body>
 </html>

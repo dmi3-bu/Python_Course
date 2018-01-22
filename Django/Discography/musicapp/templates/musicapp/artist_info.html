@@ -1,0 +1,20 @@
+{% extends "musicapp/base.html" %}
+
+{% block title %}
+{{ artist }} - MusicApp
+{% endblock %}
+
+{% block content1 %}
+<h1>{{ artist }}</h1>
+<p>{{ description }}</p>
+<ol>
+    {% for album in albums %}
+    <li>
+        <a href='{% url "album" album.id album.album_name %}'>{{ album.album_name }}</a>
+        - ({% for genre in album.genres.all %}
+        <a href='{% url "genre" genre %}'>{{ genre }}</a>
+        {% endfor %})
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}
