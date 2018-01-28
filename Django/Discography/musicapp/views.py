@@ -30,8 +30,9 @@ def artist_info(request, artist_input):
         artist = Artist.objects.get(artist_name=artist_input)
     except Artist.DoesNotExist:
         raise Http404
+
+    artist.albums.all().order_by('release_date')
     albums = artist.albums.all()
-    albums = albums.order_by('release_date')
 
     return render(request, 'musicapp/artist_info.html', {
                 'albums': albums,
@@ -55,6 +56,7 @@ def album_info(request, album_id, album_input):
     return render(request, 'musicapp/album_info.html', {
                 'artists': album.artists.all(),
                 'album_name': album.album_name,
+                'album_cover': album.album_cover,
                 'genres': album.genres.all(),
                 'release_date': album.release_date,
                 'tracks': album.tracks.all(),

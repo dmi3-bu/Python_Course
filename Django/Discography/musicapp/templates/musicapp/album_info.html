@@ -1,4 +1,5 @@
 {% extends "musicapp/base.html" %}
+{% load static %}
 
 {% block title %}
 {{ album_name }} - MusicApp
@@ -11,6 +12,7 @@
 {% endfor %}
 </h1>
 <h2>{{ album_name }}</h2>
+<img class="cover" src='{% url "index" %}{{ album_cover.url }}'><br>
 Выпущен: {{ release_date }}
 <br>
 Жанры:
@@ -23,7 +25,7 @@
 Треклист:
 <ol>
     {% for track in tracks %}
-    <li>{{ track }} - {{ track.length }}</li>
+    <li>{{ track }} - {{ track.length }} - <a href='{% url "index" %}media/{{ track.audio_file }}'>Play</a></li>
     {% endfor %}
 </ol>
 {% endblock %}

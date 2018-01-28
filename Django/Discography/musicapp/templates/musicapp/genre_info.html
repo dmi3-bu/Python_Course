@@ -9,7 +9,7 @@
 <ul>
 {% for album in albums %}
     <li>
-        <a href='{% url "album" album.album_name %}'>{{album.album_name}}</a>
+        <a href='{% url "album" album.id album.album_name %}'>{{album.album_name}}</a>
         -
         {% for artist in album.artists.all %}
         <a href='{% url "artist" artist %}'>{{artist}}</a>

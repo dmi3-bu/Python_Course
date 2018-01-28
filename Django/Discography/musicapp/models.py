@@ -25,6 +25,7 @@ class Album(models.Model):
     """
     album_name = models.CharField('Название', max_length=30)
     release_date = models.DateField('Выпущен')
+    album_cover = models.ImageField('Обложка',upload_to='images/covers/', blank=True)
     genres = models.ManyToManyField('Genre', verbose_name = 'Жанры',  related_name='albums')
     
     class Meta:
@@ -45,6 +46,7 @@ class Track(models.Model):
     order_no = models.IntegerField('Номер в альбоме')
     album = models.ForeignKey('Album',verbose_name = 'Альбом', related_name='tracks',
                               on_delete='SET_NULL')
+    audio_file = models.FileField('Аудио файл',upload_to='audio/tracks/', blank=True)
 
     class Meta:
         ordering = ('album','order_no',)

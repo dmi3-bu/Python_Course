@@ -1,19 +1,11 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <style>
-        body{
-             background-color: #F7F2E0; /* Цвет фона веб-страницы */
-        }
-        h1 {
-            color: #4da89d;
-        }
-
-        li {
-            font-size: 28px;
-        }
-    </style>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'musicapp/css/musicapp.css' %}">
 </head>
 <body>
     <img align="right" src="/static/musicapp/site_logo.png"><br>

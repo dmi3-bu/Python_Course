@@ -5,22 +5,22 @@ MusicApp
 {% endblock %}
 
 {% block content1 %}
-<h1>Дискография</h1>
-Сортировать:
-{% if request.get_full_path != "/" %}
-<a href='{% url "index" %}'>в алфавитном порядке</a>
-{% endif %}
-{% if request.get_full_path != "/?sort=r" %}
-<a href='{% url "index" %}?sort=r'>в обратном порядке</a>
-{% endif %}
-{% if request.get_full_path != "/?sort=a" %}
-<a href='{% url "index" %}?sort=a'>по количеству альбомов</a>
-{% endif %}
-<ul>
-    {% for artist in artists %}
-        <li>
-            <a href='{% url "artist" artist.artist_name %}'>{{ artist.artist_name }}</a>
-        </li>
-    {% endfor %}
-</ul>
+    <h1>Дискография</h1>
+    Сортировать:
+    {% if request.get_full_path != "/" %}
+    <a href='{% url "index" %}'>в алфавитном порядке</a>
+    {% endif %}
+    {% if request.get_full_path != "/?sort=r" %}
+    <a href='{% url "index" %}?sort=r'>в обратном порядке</a>
+    {% endif %}
+    {% if request.get_full_path != "/?sort=a" %}
+    <a href='{% url "index" %}?sort=a'>по количеству альбомов</a>
+    {% endif %}
+    <ul>
+        {% for artist in artists %}
+            <li>
+                <a href='{% url "artist" artist.artist_name %}'>{{ artist.artist_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
